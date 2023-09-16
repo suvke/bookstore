@@ -1,5 +1,7 @@
 package book.bookstore;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +14,8 @@ import book.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
+	
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -26,6 +30,10 @@ public class BookstoreApplication {
 		
 		brepository.save(new Book("Ohjelmointia", "Olli Ohjelmoija", 2020, "1234-A4B6", 25, crepository.findByName("Tietokirjallisuus").get(0)));
 		brepository.save(new Book("Java-ohjelmointi", "Olga Ohjelmoija", 2019, "9876-ABCD", 15, crepository.findByName("Tietokirjallisuus").get(0)));
+		
+		for (Book book : brepository.findAll()) {
+			log.info(book.toString());
+		}
 	};
 	}
 
