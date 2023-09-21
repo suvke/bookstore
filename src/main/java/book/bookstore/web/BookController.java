@@ -23,27 +23,28 @@ private CategoryRepository crepository;
 	
 	@GetMapping(value= {"/", "/booklist"})
 	public String bookList(Model model) {
-	model.addAttribute("books", bookRepository.findAll());
-	return "booklist";
+		model.addAttribute("books", bookRepository.findAll());
+		return "booklist";
 	}
 	
 	@RequestMapping(value = "/add")
 	public String addBook(Model model){
-	model.addAttribute("book", new Book());
-	model.addAttribute("categories", crepository.findAll());
-	return "addbook";
+		model.addAttribute("book", new Book());
+		model.addAttribute("categories", crepository.findAll());
+		return "addbook";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Book book){
-	bookRepository.save(book);
-	return "redirect:booklist";
+	public String save(Book book) {
+	
+		bookRepository.save(book);
+		return "redirect:booklist";
 	} 
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long id) {
-	bookRepository.deleteById(id);
-	return "redirect:../booklist"; 
+		bookRepository.deleteById(id);
+		return "redirect:../booklist"; 
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

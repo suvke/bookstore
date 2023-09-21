@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+
 @Entity
 public class Category {
 	
@@ -29,12 +30,12 @@ public class Category {
 		this.name = name;
 	}
 
-	public Long getId() {
-		return categoryid;
+	public Long getCategoryid() {
+		return categoryid; 
 	}
 
-	public void setId(Long id) {
-		this.categoryid = id;
+	public void setCategoryid(Long categoryid) {
+		this.categoryid = categoryid;
 	}
 
 	public String getName() {
