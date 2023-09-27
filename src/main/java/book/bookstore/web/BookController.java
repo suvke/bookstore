@@ -1,20 +1,21 @@
 package book.bookstore.web;
 
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import book.bookstore.domain.Book;
 import book.bookstore.domain.BookRepository;
 import book.bookstore.domain.CategoryRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class BookController {
@@ -53,8 +54,13 @@ private CategoryRepository crepository;
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Book book) {
+	public String save(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
 	
+		if (bindingResult.hasErrors()) {
+			System.out.print("there was an error");
+			return "addbook";
+		}
+		
 		bookRepository.save(book);
 		return "redirect:booklist";
 	} 
