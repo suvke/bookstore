@@ -54,9 +54,11 @@ private CategoryRepository crepository;
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
+	public String save(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult, Model model) {
 	
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("editBook", book);
+			model.addAttribute("categories", crepository.findAll());
 			System.out.print("there was an error");
 			return "addbook";
 		}
