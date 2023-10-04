@@ -29,7 +29,6 @@ public class BookWebSecurityConfig {
 			    )
 		)
 		.formLogin(formlogin -> formlogin
-				.loginPage("/login")
 				.defaultSuccessUrl("/booklist", true)
 				.permitAll()
 		)

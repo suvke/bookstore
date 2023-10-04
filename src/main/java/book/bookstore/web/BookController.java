@@ -2,6 +2,7 @@ package book.bookstore.web;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,6 +47,7 @@ private CategoryRepository crepository;
 	}
 	*/
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/add")
 	public String addBook(Model model){
 		model.addAttribute("book", new Book());
@@ -57,7 +59,7 @@ private CategoryRepository crepository;
 	public String save(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult, Model model) {
 	
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("editBook", book);
+			model.addAttribute("book", book);
 			model.addAttribute("categories", crepository.findAll());
 			System.out.print("there was an error");
 			return "addbook";
@@ -67,12 +69,14 @@ private CategoryRepository crepository;
 		return "redirect:booklist";
 	} 
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long id) {
 		bookRepository.deleteById(id);
 		return "redirect:../booklist"; 
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("book", bookRepository.findById(id));

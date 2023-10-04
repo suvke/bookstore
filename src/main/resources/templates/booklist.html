@@ -5,6 +5,7 @@
 </head>
 <body>
 	<table>
+	<div>Signed in: <span sec:authentication="name"></span> <form th:action="@{/logout}" method="post"></div>
 	<tr>
 	<th>Title</th>
 	<th>Author</th>
@@ -17,8 +18,8 @@
 	<td th:text="${book.isbn}"></td>
 	<td th:text="${book.publicationYear}"></td>
 	<td th:text="${book?.category?.name} ?: ''"></td>
-	<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>  
-	<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+	<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+	<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
 	</td> 
 	</tr>
 	</table>
