@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -21,6 +22,7 @@ public class BookWebSecurityConfig {
 		
 		http.
 		authorizeHttpRequests(authorize -> authorize
+				.requestMatchers(antMatcher("/books/**")).permitAll()
 				.anyRequest().authenticated()
 		)
 		.headers(headers -> headers
@@ -33,7 +35,8 @@ public class BookWebSecurityConfig {
 				.permitAll()
 		)
 		.logout(logout -> logout
-				.permitAll()
+				.permitAll())
+				.csrf(csrf -> csrf.disable()
 		);		
 				
 		return http.build();

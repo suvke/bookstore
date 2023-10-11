@@ -8,14 +8,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 
 @Entity
 public class Book {
 	
-	@NotNull
+	//@NotNull (älä määrittele tällaista, koska muuten odottaa, että id arvo annetaan lomakkeella)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
