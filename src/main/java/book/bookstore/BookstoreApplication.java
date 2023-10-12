@@ -23,9 +23,11 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 	
+	/*
 	@Bean
 	public CommandLineRunner demo(BookRepository brepository, CategoryRepository crepository, AppUserRepository urepository) {
 	return (args) -> { 
+		
 		
 		crepository.save(new Category("Tietokirjallisuus"));
 		crepository.save(new Category("Kaunokirjallisuus"));
@@ -41,8 +43,10 @@ public class BookstoreApplication {
 		
 		for (Book book : brepository.findAll()) {
 			log.info(book.toString());
+			
 		}
 	};
 	}
+	*/
 
 }

@@ -54,8 +54,7 @@ public class BookRepositoryTests {
 		assertThat(book).isEmpty();
 	}
 	
-	// tämän testin tulisi feilata, koska tyhjää kirjaa ei pitäisi pystyä tallentamaan
-	// tällä hetkellä testi kuitenkin menee läpi, koska tyhjän kirjan tallentamista ei ole rajoitettu
+	// tämä testi menee tällä hetkellä läpi, koska tyhjän kirjan tallentamista ei ole rajoitettu validointisäännöillä
 	@Test
 	public void tryToSaveEmptyBook() {
 		Book book = new Book();

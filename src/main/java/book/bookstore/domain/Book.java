@@ -1,5 +1,6 @@
 package book.bookstore.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,17 +17,22 @@ public class Book {
 	
 	//@NotNull (älä määrittele tällaista, koska muuten odottaa, että id arvo annetaan lomakkeella)
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Size(min = 1, max = 30)
 	private String title;
+	
 	@Size(min = 1, max = 30)
 	private String author;
+	
+	@Column(name="publicationyear")
 	@Min(value = 1800, message = "min value is 1800")
 	@Max(value = 2023, message = "max value is 2023")
 	private int publicationYear;
+	
 	private String isbn;
+	
 	@Min(value = 1, message = "min value is 1")
 	@Max(value = 1000, message = "max value is 1000")
 	private int price;
